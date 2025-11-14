@@ -1,0 +1,81 @@
+// import java.util.Scanner;
+
+class Assets {
+
+    private int consumerNo;
+    private String consumerName;
+    private int previousReading;
+    private int currentReading;
+    private String connectionType;
+
+    public Assets(int consumerNo, String consumerName, int previousReading, int currentReading, String connectionType) {
+        this.consumerNo = consumerNo;
+        this.consumerName = consumerName;
+        this.previousReading = previousReading;
+        this.currentReading = currentReading;
+        this.connectionType = connectionType;
+    }
+
+    // Returns total units consumed in 2 months
+    public int getUnitsConsumed() {
+        return currentReading - previousReading;
+    }
+
+    // Validates meter readings
+    public boolean isValidReading() {
+        return currentReading >= previousReading && previousReading >= 0;
+    }
+
+    // Calculates electricity bill based on connection type and slab rates
+    public double calculateBill() {
+        int units = getUnitsConsumed();
+        double bill = 0.0;
+
+        if (connectionType.equalsIgnoreCase("Domestic")) {
+
+            if (units <= 100) {
+                bill = units * 2.0;
+            } else if (units <= 200) {
+                bill = 100 * 2.0 + (units - 100) * 4.5;
+            } else if (units <= 500) {
+                bill = 100 * 2.0 + 100 * 4.5 + (units - 200) * 6.0;
+            } else {
+                bill = 100 * 2.0 + 100 * 4.5 + 300 * 6.0 + (units - 500) * 7.0;
+            }
+
+        } else if (connectionType.equalsIgnoreCase("Commercial")) {
+
+            if (units <= 100) {
+                bill = units * 4.0;
+            } else if (units <= 200) {
+                bill = 100 * 4.0 + (units - 100) * 7.5;
+            } else if (units <= 500) {
+                bill = 100 * 4.0 + 100 * 7.5 + (units - 200) * 10.0;
+            } else {
+                bill = 100 * 4.0 + 100 * 7.5 + 300 * 10.0 + (units - 500) * 12.0;
+            }
+
+        } else {
+            System.out.println("Invalid connection type. Please enter Domestic or Commercial.");
+        }
+
+        return bill;
+    }
+
+    // Displays bill details
+    public void displayBill() {
+
+        if (!isValidReading()) {
+            System.out.println("Invalid meter readings. Current reading must be greater than or equal to previous reading.");
+            return;
+        }
+
+        System.out.println("\n----- Electricity Bill (Every Two-month Once) -----");
+        System.out.println("Consumer Number    : " + consumerNo);
+        System.out.println("Consumer Name      : " + consumerName);
+        System.out.println("Connection Type    : " + connectionType);
+        System.out.println("Units Consumed     : " + getUnitsConsumed());
+        System.out.println("Total Bill Amount  : Rs. " + calculateBill());
+        System.out.println("-----------------------------------------");
+    }
+}
