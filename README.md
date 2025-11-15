@@ -40,6 +40,6 @@ Commercial Connection
 | 500+    | 12.0          |
 
 
-**How to Run**
+**How to Run** : 
 javac ElectricityBillCalculator.java | 
 java ElectricityBillCalculator
