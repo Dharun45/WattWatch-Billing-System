@@ -41,5 +41,5 @@ Commercial Connection
 
 
 **How to Run**
-javac ElectricityBillCalculator.java
+javac ElectricityBillCalculator.java | 
 java ElectricityBillCalculator
