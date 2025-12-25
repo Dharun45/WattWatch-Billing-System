@@ -1,44 +1,19 @@
-import java.util.Scanner;
 public class Main {
-
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Assets a1 = new Assets(101, "Ravi", 100, 180, "Domestic");
+        a1.displayBill();
 
-        System.out.println("Note: Current reading must be greater than or equal to previous reading.\n");
-        System.out.print("Enter number of households: ");
-        int n = scanner.nextInt();
-        scanner.nextLine();
+        Assets a2 = new Assets(102, "Kumar", 200, 450, "Domestic");
+        a2.displayBill();
 
-        for (int i = 0; i < n; i++) {
+        Assets a3 = new Assets(103, "Tech Mart", 500, 650, "Commercial");
+        a3.displayBill();
 
-            System.out.println("\nEnter details for Household " + (i + 1));
+        Assets a4 = new Assets(104, "Suresh", 500, 450, "Domestic");
+        a4.displayBill();
 
-            System.out.print("Consumer Number: ");
-            int consumerNo = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Consumer Name: ");
-            String consumerName = scanner.nextLine();
-
-            System.out.print("Previous Meter Reading: ");
-            int prevReading = scanner.nextInt();
-
-            System.out.print("Current Meter Reading: ");
-            int currReading = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.print("Connection Type (Domestic/Commercial): ");
-            String connType = scanner.nextLine();
-
-            Assets bill = new Assets(
-                    consumerNo, consumerName, prevReading, currReading, connType
-            );
-
-            bill.displayBill();
-            scanner.close();
-        }
-
-        
+        Assets a5 = new Assets(105, "Raj", 100, 300, "Industrial");
+        a5.displayBill();
     }
 }
