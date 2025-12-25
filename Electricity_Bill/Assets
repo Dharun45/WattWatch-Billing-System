@@ -1,5 +1,3 @@
-// import java.util.Scanner;
-
 class Assets {
 
     private int consumerNo;
@@ -8,7 +6,10 @@ class Assets {
     private int currentReading;
     private String connectionType;
 
-    public Assets(int consumerNo, String consumerName, int previousReading, int currentReading, String connectionType) {
+    public Assets(int consumerNo, String consumerName,
+                  int previousReading, int currentReading,
+                  String connectionType) {
+
         this.consumerNo = consumerNo;
         this.consumerName = consumerName;
         this.previousReading = previousReading;
@@ -16,18 +17,25 @@ class Assets {
         this.connectionType = connectionType;
     }
 
-    // Returns total units consumed in 2 months
+    // Calculate total units consumed
     public int getUnitsConsumed() {
         return currentReading - previousReading;
     }
 
-    // Validates meter readings
+    // Validate meter readings
     public boolean isValidReading() {
-        return currentReading >= previousReading && previousReading >= 0;
+        return previousReading >= 0 && currentReading >= previousReading;
     }
 
-    // Calculates electricity bill based on connection type and slab rates
+    // Validate connection type
+    public boolean isValidConnectionType() {
+        return connectionType.equalsIgnoreCase("Domestic") ||
+               connectionType.equalsIgnoreCase("Commercial");
+    }
+
+    // Calculate electricity bill using slab-wise tariff
     public double calculateBill() {
+
         int units = getUnitsConsumed();
         double bill = 0.0;
 
@@ -54,19 +62,21 @@ class Assets {
             } else {
                 bill = 100 * 4.0 + 100 * 7.5 + 300 * 10.0 + (units - 500) * 12.0;
             }
-
-        } else {
-            System.out.println("Invalid connection type. Please enter Domestic or Commercial.");
         }
 
         return bill;
     }
 
-    // Displays bill details
+    // Display bill details
     public void displayBill() {
 
         if (!isValidReading()) {
             System.out.println("Invalid meter readings. Current reading must be greater than or equal to previous reading.");
+            return;
+        }
+
+        if (!isValidConnectionType()) {
+            System.out.println("Invalid connection type. Please enter Domestic or Commercial.");
             return;
         }
 
